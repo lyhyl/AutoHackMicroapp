@@ -2,6 +2,7 @@
 using SudokuSolverLib;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using Tesseract;
 
@@ -11,11 +12,14 @@ namespace AutoSudoku
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Single Plyaer Mode?(Y/y)");
+            bool singlePlayer = Console.ReadLine().ToLower().Contains("y");
+
             AdbWrapper adb = new AdbWrapper();
 
             int[][] board = new int[9][];
             StringBuilder sboard = new StringBuilder();
-            Rectangle boardRegion = new Rectangle(55, 407, 966, 966);
+            Rectangle boardRegion = singlePlayer ? new Rectangle(55, 407, 966, 966) : new Rectangle(55, 330, 966, 966);
             float offset = 5;
 
             using (var img = adb.GetScreenshot())
@@ -50,26 +54,34 @@ namespace AutoSudoku
                                 }
                             }
                         }
-                        sboard.AppendLine();
+                        sboard.Append('\n');
                     }
                 }
             }
-            
-            var p = SudokuPuzzle.FromString(sboard.ToString(), 3, 3);
-            Console.WriteLine(p);
-            p.SolveGrid();
-            Console.WriteLine(p);
-            p.SolveGrid();
-            
+
+            Console.WriteLine(sboard);
+            var option = StringSplitOptions.RemoveEmptyEntries;
+            var mod = Console.ReadLine().Split(new char[] { ' ' }, option).Select(a => int.Parse(a)).ToArray();
+            while (mod.Length == 3)
+            {
+                sboard[mod[0] * 10 + mod[1]] = (char)(mod[2] + '0');
+                mod = Console.ReadLine().Split(new char[] { ' ' }, option).Select(a => int.Parse(a)).ToArray();
+            }
+            Console.WriteLine(sboard);
+
+            var puzzle = SudokuPuzzle.FromString(sboard.ToString(), 3, 3);
+            puzzle.SolveGrid();
+            Console.WriteLine(puzzle);
+
             int kx = 160 + 75;
-            int ky = 1460 + 75;
+            int ky = singlePlayer ? 1460 + 75 : 1356 + 75;
             int cellh = boardRegion.Height / 9;
             int cellw = boardRegion.Width / 9;
             int bx = boardRegion.X + boardRegion.Width / 18;
             int by = boardRegion.Y + boardRegion.Height / 18;
 
             int index = 0;
-            foreach (var node in p.GetNodes())
+            foreach (var node in puzzle.GetNodes())
             {
                 int v = node.Value;
                 adb.Tap(new Point(kx + v % 5 * 150, ky + v / 5 * 150));
