@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace AutoCore
 {
@@ -18,7 +19,7 @@ namespace AutoCore
             adbPath = Path.Combine(adbDir, "adb.exe");
         }
 
-        public string AdbCommand(string arg)
+        public string AdbCommand(string arg, bool waitForResult = false)
         {
             using (Process process = new Process())
             {
@@ -26,31 +27,35 @@ namespace AutoCore
                 process.StartInfo.WorkingDirectory = adbDir;
                 process.StartInfo.Arguments = arg;
                 process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardInput = true;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.RedirectStandardInput = waitForResult;
+                process.StartInfo.RedirectStandardOutput = waitForResult;
+                process.StartInfo.RedirectStandardError = waitForResult;
                 process.StartInfo.CreateNoWindow = true;
                 process.Start();
 
-                var result = process.StandardOutput.ReadToEnd();
-                process.WaitForExit();
-                process.Close();
+                string result = string.Empty;
+                if (waitForResult)
+                {
+                    result = process.StandardOutput.ReadToEnd();
+                    process.WaitForExit();
+                }
                 return result;
             }
         }
 
-        public void Tap(Point x)
+        public void Tap(int x, int y, int sleep = 200)
         {
-            var args = $"shell input tap {x.X} {x.Y}";
+            var args = $"shell input tap {x} {y}";
             AdbCommand(args);
+            Thread.Sleep(sleep);
         }
 
-        public void Tap2(Point x)
+        public void Tap2(int x, int y)
         {
-            var args = "shell sendevent /dev/input/event2 {0} {1} {2}";
+            var args = "shell sendevent /dev/input/event5 {0} {1} {2}";
 
-            AdbCommand(string.Format(args, 3, 0, x.X));
-            AdbCommand(string.Format(args, 3, 1, x.Y));
+            AdbCommand(string.Format(args, 3, 0x35, x));
+            AdbCommand(string.Format(args, 3, 0x36, y));
 
             AdbCommand(string.Format(args, 1, 330, 1));
             AdbCommand(string.Format(args, 0, 0, 0));
@@ -77,12 +82,12 @@ namespace AutoCore
         {
             var fileDirectory = Path.GetTempPath();
             var fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".png";
-            var createFileArg = $"shell screencap -p /sdcard/{fileName}";
-            AdbCommand(createFileArg);
-            var downloadArg = $"pull /sdcard/{fileName} {fileDirectory}";
-            AdbCommand(downloadArg);
-            var deleteFileArg = $"shell rm /sdcard/{fileName}";
-            AdbCommand(deleteFileArg);
+            var createFileArg = $"shell screencap -p /sdcard/adb/{fileName}";
+            AdbCommand(createFileArg, true);
+            var downloadArg = $"pull /sdcard/adb/{fileName} {fileDirectory}";
+            AdbCommand(downloadArg, true);
+            var deleteFileArg = $"shell rm /sdcard/adb/{fileName}";
+            AdbCommand(deleteFileArg, true);
             var imgFilePath = Path.Combine(fileDirectory, fileName);
             if (!File.Exists(imgFilePath))
                 return null;

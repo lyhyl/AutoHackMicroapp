@@ -84,8 +84,8 @@ namespace AutoSudoku
             foreach (var node in puzzle.GetNodes())
             {
                 int v = node.Value;
-                adb.Tap(new Point(kx + v % 5 * 150, ky + v / 5 * 150));
-                adb.Tap(new Point(bx + index % 9 * cellw, by + index / 9 * cellh));
+                adb.Tap(kx + v % 5 * 150, ky + v / 5 * 150);
+                adb.Tap(bx + index % 9 * cellw, by + index / 9 * cellh);
                 index++;
             }
         }

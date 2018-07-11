@@ -7,9 +7,12 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AutoCore", "AutoCore\AutoCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSudoku", "AutoSudoku\AutoSudoku.csproj", "{A712077E-D107-4B6B-819F-165A60D1B339}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSpeedLinkup", "AutoSpeedLinkup\AutoSpeedLinkup.csproj", "{C366D41E-DED3-45FD-9BD5-1EAF6DD40A08}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AutoCore\AutoCore.projitems*{a712077e-d107-4b6b-819f-165a60d1b339}*SharedItemsImports = 4
+		AutoCore\AutoCore.projitems*{c366d41e-ded3-45fd-9bd5-1eaf6dd40a08}*SharedItemsImports = 4
 		AutoCore\AutoCore.projitems*{ec64e7d3-a7f1-424b-aec8-ae16710b014d}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +24,10 @@ Global
 		{A712077E-D107-4B6B-819F-165A60D1B339}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A712077E-D107-4B6B-819F-165A60D1B339}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A712077E-D107-4B6B-819F-165A60D1B339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C366D41E-DED3-45FD-9BD5-1EAF6DD40A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C366D41E-DED3-45FD-9BD5-1EAF6DD40A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C366D41E-DED3-45FD-9BD5-1EAF6DD40A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C366D41E-DED3-45FD-9BD5-1EAF6DD40A08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
