@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2043
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AutoCore", "AutoCore\AutoCore.shproj", "{EC64E7D3-A7F1-424B-AEC8-AE16710B014D}"
 EndProject
@@ -9,8 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSudoku", "AutoSudoku\Au
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSpeedLinkup", "AutoSpeedLinkup\AutoSpeedLinkup.csproj", "{C366D41E-DED3-45FD-9BD5-1EAF6DD40A08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYAutoGo", "ZYAutoGo\ZYAutoGo.csproj", "{5D9551DC-E9EF-455E-B2BD-2FB9EE17E579}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		AutoCore\AutoCore.projitems*{5d9551dc-e9ef-455e-b2bd-2fb9ee17e579}*SharedItemsImports = 4
 		AutoCore\AutoCore.projitems*{a712077e-d107-4b6b-819f-165a60d1b339}*SharedItemsImports = 4
 		AutoCore\AutoCore.projitems*{c366d41e-ded3-45fd-9bd5-1eaf6dd40a08}*SharedItemsImports = 4
 		AutoCore\AutoCore.projitems*{ec64e7d3-a7f1-424b-aec8-ae16710b014d}*SharedItemsImports = 13
@@ -28,6 +31,10 @@ Global
 		{C366D41E-DED3-45FD-9BD5-1EAF6DD40A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C366D41E-DED3-45FD-9BD5-1EAF6DD40A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C366D41E-DED3-45FD-9BD5-1EAF6DD40A08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D9551DC-E9EF-455E-B2BD-2FB9EE17E579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D9551DC-E9EF-455E-B2BD-2FB9EE17E579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D9551DC-E9EF-455E-B2BD-2FB9EE17E579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D9551DC-E9EF-455E-B2BD-2FB9EE17E579}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
